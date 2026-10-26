@@ -1,69 +1,314 @@
+'use client';
+
+import { useState } from "react";
+import Link from "next/link";
 import Image from "next/image";
+import ParticleCanvas from "./ParticaleCanvas";
+
+// React Icons import
+import { HiMail } from "react-icons/hi";
+import { FaGithub, FaLinkedin, FaExternalLinkAlt } from "react-icons/fa";
+import { BiPencil } from "react-icons/bi";
 
 export default function Home() {
+  const [activeTab, setActiveTab] = useState("ph");
+
+  // আপনার প্রজেক্টের ডাটা লিস্ট (SmartResell, DocAppoint এবং DigiTools)
+  const projectsList = [
+    {
+      id: "1",
+      title: "SmartResell",
+      image: "/project1.png",
+      technologies: ["Next.js", "React", "Tailwind CSS", "Node.js", "Express.js", "MongoDB"],
+      description: "SmartResell is a modern second-hand marketplace where users can browse products, view product details, and manage their buying and selling activities.",
+      live: "https://b13-a10-smartresell-client.vercel.app/",
+      github: "https://github.com/j59329650-sys/b13-a10-smartresell-client",
+    },
+    {
+      id: "2",
+      title: "DocAppoint",
+      image: "/project2.png",
+      technologies: ["React", "JavaScript", "Tailwind CSS", "Firebase"],
+      description: "A responsive job portal that allows users to explore available jobs and find suitable career opportunities through a clean and user-friendly interface.",
+      live: "https://b13-ex09.vercel.app",
+      github: "https://github.com/j59329650-sys/B13-Ex09",
+    },
+    {
+      id: "3",
+      title: "DigiTools",
+      image: "/project3.png",
+      technologies: ["Next.js", "React", "Tailwind CSS", "JavaScript"],
+      description: "A modern and responsive e-commerce website designed to provide users with a smooth product browsing and shopping experience.",
+      live: "https://j59329650-sys.github.io/B13-Ex06/",
+      github: "https://github.com/j59329650-sys/B13-Ex06",
+    }
+  ];
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+    <main className="min-h-screen bg-[#0a192f] text-slate-300 font-sans selection:bg-[#64ffda] selection:text-black">
+
+      {/* Navbar */}
+      <nav className="fixed left-0 right-0 top-0 z-50 bg-[#0a192f]/90 backdrop-blur-md px-6 lg:px-12 py-5 border-b border-slate-800/50">
+        <div className="mx-auto flex max-w-7xl items-center justify-between">
+          <Link href="/" className="text-lg font-bold tracking-wide text-white hover:text-[#64ffda] transition">
+            Tahmina Akter
+          </Link>
+
+          <div className="hidden items-center gap-8 md:flex text-sm font-medium">
+            <Link href="#about" className="text-slate-300 transition hover:text-[#64ffda]">About</Link>
+            <Link href="#experience" className="text-slate-300 transition hover:text-[#64ffda]">Experience</Link>
+            <Link href="#projects" className="text-slate-300 transition hover:text-[#64ffda]">Projects</Link>
+            <Link href="#contact" className="text-slate-300 transition hover:text-[#64ffda]">Contact</Link>
+          </div>
+
+          <div className="flex items-center gap-5 text-xl text-slate-300">
+            <a 
+              href="mailto:tahmina.learn@gmail.com" 
+              title="Email"
+              className="hover:text-[#64ffda] transition-all hover:-translate-y-0.5"
             >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+              <HiMail />
+            </a>
+            <a 
+              href="https://github.com/j59329650-sys" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              title="GitHub"
+              className="hover:text-[#64ffda] transition-all hover:-translate-y-0.5"
             >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+              <FaGithub />
+            </a>
+            <a 
+              href="https://www.linkedin.com/in/tahmina-akter-9a41333b6/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              title="LinkedIn"
+              className="hover:text-[#64ffda] transition-all hover:-translate-y-0.5"
+            >
+              <FaLinkedin />
+            </a>
+            <a 
+              href="#about" 
+              title="Blog / Notes"
+              className="hover:text-[#64ffda] transition-all hover:-translate-y-0.5"
+            >
+              <BiPencil />
+            </a>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+      </nav>
+
+      {/* Hero Section */}
+      <section className="relative flex min-h-screen items-center justify-center overflow-hidden px-6 lg:px-12 pt-20">
+        <div className="mx-auto grid w-full max-w-7xl items-center gap-12 lg:grid-cols-2">
+          
+          <div className="z-10">
+            <h1 className="text-5xl font-extrabold leading-tight text-white sm:text-6xl lg:text-7xl tracking-tight">
+              hi, <span className="text-[#64ffda]">tahmina</span> here.
+            </h1>
+
+            <p className="mt-6 max-w-lg text-lg leading-relaxed text-slate-400">
+              Frontend engineer and developer. I build responsive web applications with React & Next.js by day and make interactive web projects by night.
+            </p>
+
+            <div className="mt-8">
+              <a
+                href="mailto:tahmina.learn@gmail.com"
+                className="inline-flex items-center gap-2 rounded border border-[#64ffda] bg-transparent px-6 py-3 font-mono text-sm font-semibold text-[#64ffda] transition hover:bg-[#64ffda]/10"
+              >
+                <HiMail className="text-lg" /> Say hi!
+              </a>
+            </div>
+          </div>
+
+          <div className="flex justify-center lg:justify-end w-full">
+            <div className="relative flex items-center justify-center scale-95 sm:scale-100">
+              <ParticleCanvas />
+            </div>
+          </div>
+
         </div>
-      </main>
-    </div>
+      </section>
+
+      {/* About Section */}
+      <section id="about" className="max-w-5xl mx-auto px-6 py-24">
+        <div className="flex items-center gap-4 mb-10">
+          <h2 className="text-3xl font-bold text-white tracking-wide">
+            <span className="text-[#64ffda] font-mono">/</span> about me
+          </h2>
+          <div className="h-[1px] bg-slate-700/60 flex-1 max-w-xs"></div>
+        </div>
+
+        <div className="grid items-start gap-12 lg:grid-cols-3">
+          <div className="lg:col-span-2 space-y-4 text-slate-400 leading-relaxed">
+            <p>
+              I am currently a <span className="text-white font-semibold">Frontend Developer</span> working with modern web stacks. Previously, I completed intensive full-stack development training at <span className="text-[#64ffda]">Programming Hero</span>.
+            </p>
+            <p>
+              Here are some technologies I have been working with:
+            </p>
+
+            <ul className="grid grid-cols-2 gap-2 text-sm font-mono text-slate-300 pt-2">
+              <li className="flex items-center gap-2"><span className="text-[#64ffda]">►</span> JavaScript (ES6+)</li>
+              <li className="flex items-center gap-2"><span className="text-[#64ffda]">►</span> TypeScript</li>
+              <li className="flex items-center gap-2"><span className="text-[#64ffda]">►</span> React.js</li>
+              <li className="flex items-center gap-2"><span className="text-[#64ffda]">►</span> Next.js</li>
+              <li className="flex items-center gap-2"><span className="text-[#64ffda]">►</span> Tailwind CSS</li>
+              <li className="flex items-center gap-2"><span className="text-[#64ffda]">►</span> MongoDB</li>
+            </ul>
+          </div>
+
+          <div className="flex justify-center">
+            <div className="relative group w-[240px] h-[280px]">
+              <div className="absolute inset-0 rounded-xl bg-[#64ffda] translate-x-3 translate-y-3 transition duration-300 group-hover:translate-x-2 group-hover:translate-y-2"></div>
+              <div className="relative w-full h-full overflow-hidden rounded-xl bg-slate-800 border border-slate-700">
+                <Image
+                  src="/profile1.png"
+                  alt="Tahmina"
+                  fill
+                  className="object-cover grayscale hover:grayscale-0 transition duration-500"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Experience Section */}
+      <section id="experience" className="max-w-5xl mx-auto px-6 py-24">
+        <div className="flex items-center gap-4 mb-10">
+          <h2 className="text-3xl font-bold text-white tracking-wide">
+            <span className="text-[#64ffda] font-mono">/</span> experience
+          </h2>
+          <div className="h-[1px] bg-slate-700/60 flex-1 max-w-xs"></div>
+        </div>
+
+        <div className="flex flex-col md:flex-row gap-8">
+          <div className="flex md:flex-col border-b md:border-b-0 md:border-l border-slate-700">
+            <button
+              onClick={() => setActiveTab("ph")}
+              className={`px-4 py-3 text-left font-mono text-sm transition ${
+                activeTab === "ph"
+                  ? "text-[#64ffda] border-b-2 md:border-b-0 md:border-l-2 border-[#64ffda] bg-[#112240]"
+                  : "text-slate-400 hover:text-white"
+              }`}
+            >
+              Programming Hero
+            </button>
+            <button
+              onClick={() => setActiveTab("freelance")}
+              className={`px-4 py-3 text-left font-mono text-sm transition ${
+                activeTab === "freelance"
+                  ? "text-[#64ffda] border-b-2 md:border-b-0 md:border-l-2 border-[#64ffda] bg-[#112240]"
+                  : "text-slate-400 hover:text-white"
+              }`}
+            >
+              Frontend Projects
+            </button>
+          </div>
+
+          <div className="flex-1 space-y-4">
+            {activeTab === "ph" && (
+              <div>
+                <h3 className="text-xl font-bold text-white flex flex-wrap items-center gap-2">
+                  Web Development Graduate <span className="text-[#64ffda]">@ 
+                    <a 
+                      href="https://drive.google.com/file/d/1bIV1viPxXrDKVmuvdUJFQqqcZSiAXmDo/view" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="hover:underline inline-flex items-center gap-1"
+                    >
+                      Programming Hero <FaExternalLinkAlt className="text-xs" />
+                    </a>
+                  </span>
+                </h3>
+                <p className="text-sm font-mono text-slate-400 mt-1">2025 - 2026</p>
+                <ul className="mt-4 space-y-3 text-slate-400 text-sm">
+                  <li className="flex gap-2">
+                    <span className="text-[#64ffda]">►</span>
+                    <span>Built scalable web applications using React.js, Next.js, Express.js, and MongoDB.</span>
+                  </li>
+                  <li className="flex gap-2">
+                    <span className="text-[#64ffda]">►</span>
+                    <span>Designed clean and responsive user interfaces using Tailwind CSS and DaisyUI.</span>
+                  </li>
+                </ul>
+              </div>
+            )}
+
+            {activeTab === "freelance" && (
+              <div>
+                <h3 className="text-xl font-bold text-white">
+                  Junior Frontend Engineer <span className="text-[#64ffda]">@ Self-Employed</span>
+                </h3>
+                <p className="text-sm font-mono text-slate-400 mt-1">PRESENT</p>
+                <ul className="mt-4 space-y-3 text-slate-400 text-sm">
+                  <li className="flex gap-2">
+                    <span className="text-[#64ffda]">►</span>
+                    <span>Developing modern full-stack products such as SmartResell and DocAppoint platforms.</span>
+                  </li>
+                </ul>
+              </div>
+            )}
+          </div>
+        </div>
+      </section>
+
+      {/* Projects Section - Dynamically mapped from projectsList */}
+      <section id="projects" className="max-w-5xl mx-auto px-6 py-24">
+        <div className="flex items-center gap-4 mb-10">
+          <h2 className="text-3xl font-bold text-white tracking-wide">
+            <span className="text-[#64ffda] font-mono">/</span> projects
+          </h2>
+          <div className="h-[1px] bg-slate-700/60 flex-1 max-w-xs"></div>
+        </div>
+
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {projectsList.map((project) => (
+            <div key={project.id} className="rounded bg-[#112240] p-6 transition duration-300 hover:-translate-y-2 flex flex-col justify-between">
+              <div>
+                <div className="flex justify-between items-center mb-6">
+                  <span className="text-3xl text-[#64ffda]">📁</span>
+                  <div className="flex items-center gap-3">
+                    <a href={project.github} target="_blank" rel="noopener noreferrer" title="GitHub Repo" className="text-slate-400 hover:text-[#64ffda] text-lg">
+                      <FaGithub />
+                    </a>
+                    <a href={project.live} target="_blank" rel="noopener noreferrer" title="Live Preview" className="text-slate-400 hover:text-[#64ffda] text-lg">
+                      <FaExternalLinkAlt />
+                    </a>
+                  </div>
+                </div>
+                <h3 className="text-xl font-bold text-white hover:text-[#64ffda] transition">{project.title}</h3>
+                <p className="mt-3 text-sm text-slate-400 leading-relaxed">
+                  {project.description}
+                </p>
+              </div>
+              <div className="mt-6 flex flex-wrap gap-2 text-xs font-mono text-[#64ffda]">
+                {project.technologies.map((tech, index) => (
+                  <span key={index} className="bg-[#0a192f] px-2 py-1 rounded border border-[#64ffda]/20">
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Contact Section */}
+      <section id="contact" className="max-w-3xl mx-auto px-6 py-32 text-center">
+        <h2 className="text-4xl font-bold text-white mb-4">Get In Touch</h2>
+        <p className="text-slate-400 leading-relaxed mb-8">
+          I'm currently looking for new frontend opportunities. Whether you have a project in mind or just want to say hi, feel free to reach out!
+        </p>
+        <a
+          href="mailto:tahmina.learn@gmail.com"
+          className="inline-flex items-center gap-2 rounded border border-[#64ffda] px-8 py-4 font-mono text-sm text-[#64ffda] transition hover:bg-[#64ffda]/10"
+        >
+          <HiMail className="text-lg" /> Say Hello
+        </a>
+      </section>
+
+    </main>
   );
 }
